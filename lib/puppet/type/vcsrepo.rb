@@ -43,6 +43,9 @@ Puppet::Type.newtype(:vcsrepo) do
   feature :p4config,
           "The provider understands Perforce Configuration"
 
+  feature :verify_ssl,
+          "The provider supports disabling SSL certificate verifications"
+
   ensurable do
     attr_accessor :latest
 
@@ -213,6 +216,11 @@ Puppet::Type.newtype(:vcsrepo) do
 
   newparam :p4config, :required_features => [:p4config] do
     desc "The Perforce P4CONFIG environment."
+  end
+
+  newparam :verify_ssl, :required_features => [:verify_ssl] do
+    desc "Wether to check SSL certificates or not"
+    defaultto true
   end
 
   autorequire(:package) do
